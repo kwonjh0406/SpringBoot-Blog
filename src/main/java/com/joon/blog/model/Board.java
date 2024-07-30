@@ -9,6 +9,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 
 @Data
@@ -30,9 +31,14 @@ public class Board {
     @ColumnDefault("0")
     private int count;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER) // 기본 전략임. 일단 user도 들고옴
     @JoinColumn(name="userId")
     private User user;
+
+    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
+    // JPA 다대일 기본 fetch 전략은 LAZY
+    // 근데 본문을 불러올 때 댓글은 항상 같이 불러오므로 fetch 전략 EAGER로 변경
+    private List<Reply> reply;
 
     @CreationTimestamp
     private Timestamp createDate;
