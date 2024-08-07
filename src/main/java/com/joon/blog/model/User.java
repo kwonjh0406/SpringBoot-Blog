@@ -7,8 +7,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.stereotype.Controller;
 
+import javax.management.relation.Role;
 import java.sql.Timestamp;
 
 @Data
@@ -16,6 +18,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Builder
 @Entity
+// @DynamicInsert Insert 시에 null 필드는 제외시킴
 public class User {
 
     @Id
@@ -31,8 +34,8 @@ public class User {
     @Column(nullable = false, length = 50)
     private String email;
 
-    @ColumnDefault("'user'")
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private RoleType role;
 
     @CreationTimestamp
     private Timestamp createDate;

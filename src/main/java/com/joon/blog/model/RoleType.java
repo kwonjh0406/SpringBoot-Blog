@@ -1,5 +1,5 @@
 package com.joon.blog.model;
 
-public enum Role {
+public enum RoleType {
     ADMIN, USER;
 }
