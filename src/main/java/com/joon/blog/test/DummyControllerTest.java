@@ -3,6 +3,7 @@ package com.joon.blog.test;
 import com.joon.blog.model.RoleType;
 import com.joon.blog.model.User;
 import com.joon.blog.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,7 @@ public class DummyControllerTest {
     @Autowired // 의존성 주입 Dependency Injection - DI
     private UserRepository userRepository;
 
+    @Transactional
     @PutMapping("/dummy/user/{id}")
     public User updateUser(@PathVariable int id, @RequestBody User requestUser) {
         System.out.println("id: " + id);
@@ -36,7 +38,7 @@ public class DummyControllerTest {
         &#xC218;&#xC815; &#xC5F0;&#xC0B0;&#xC5D0;&#xB294; save &#xB294; &#xC0AC;&#xC6A9;&#xD558;&#xC9C0;&#xC54A;&#xC74C;
          */
 
-        userRepository.save(user);
+//        userRepository.save(user);
         return null;
     }
 
