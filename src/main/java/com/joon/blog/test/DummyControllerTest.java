@@ -5,6 +5,7 @@ import com.joon.blog.model.User;
 import com.joon.blog.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -20,6 +21,23 @@ public class DummyControllerTest {
     @Autowired // 의존성 주입 Dependency Injection - DI
     private UserRepository userRepository;
 
+    /**
+     * DELETE 테스트
+     *
+     * @param id: 삭제할 대상 아이디
+     * @return
+     */
+    @DeleteMapping("/dummy/user/{id}")
+    public String delete(@PathVariable int id) {
+        try {
+            userRepository.deleteById(id);
+
+        } catch (Exception e) {
+            return "삭제에 실패하였습니다. 해당 id는 DB에 존재 X";
+        }
+        return "sevvces";
+    }
+
     @Transactional
     @PutMapping("/dummy/user/{id}")
     public User updateUser(@PathVariable int id, @RequestBody User requestUser) {
@@ -27,7 +45,7 @@ public class DummyControllerTest {
         System.out.println("password: " + requestUser.getPassword());
         System.out.println("email: " + requestUser.getEmail());
 
-        User user = userRepository.findById(id).orElseThrow(()->{
+        User user = userRepository.findById(id).orElseThrow(() -> {
             return new IllegalArgumentException("수정에 실패하였습니다. 존재하지 않는 유저");
         });
         user.setPassword(requestUser.getPassword());
@@ -39,7 +57,7 @@ public class DummyControllerTest {
          */
 
 //        userRepository.save(user);
-        return null;
+        return user;
     }
 
     @GetMapping("/dummy/user")
