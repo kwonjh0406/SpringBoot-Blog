@@ -9,7 +9,7 @@
 <div th:replace="fragments/header :: nav"></div>
 
 <div class="container-fluid mt-3">
-    <form action="/action_page.php">
+    <form>
 
         <div class="mb-3">
             <label for="username" class="form-label">Username:</label>
@@ -17,14 +17,15 @@
         </div>
 
         <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+        </div>
+
+        <div class="mb-3">
             <label for="email" class="form-label">Email:</label>
             <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
         </div>
 
-        <div class="mb-3">
-            <label for="password" class="form-label">Password:</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
-        </div>
         <!--
         <div class="form-check mb-3">
             <label class="form-check-label">
@@ -32,9 +33,13 @@
             </label>
         </div>
         -->
-        <button type="submit" class="btn btn-primary">회원가입</button>
+
     </form>
+    <button id="btn-save" class="btn btn-primary">회원가입</button>
+
 </div>
+
+<script src="/js/user/user.js"></script>
 
 <div th:replace="fragments/footer :: div"></div>
 
